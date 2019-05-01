@@ -16,8 +16,20 @@ router.post('/', function(req, res, next) {
       password: bcrypt.hashSync(req.body.password, 10),
       apiKey: uuid()
     })
+    .then(user => {
+      res.setHeader("Content-Type", "application/json");
+      res.status(201).send(JSON.stringify(user.apiKey))
+    })
+    .catch(error => {
+      res.setHeader("Content-Type", "application/json");
+      res.status(409).send({ error });
+    })
+  } else {
+    res.setHeader("Content-Type", "application/json");
+    res.status(409).send(JSON.stringify({
+      error: "password and password confirmation don't match."
+    }));
   }
-  res.send('respond with a resource');
 });
 
 module.exports = router;
