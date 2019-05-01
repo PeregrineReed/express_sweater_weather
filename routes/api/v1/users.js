@@ -1,16 +1,12 @@
 var express = require('express');
 var bcrypt = require('bcrypt');
 var uuid = require('uuid/v4');
+var User = require('../../../models').User;
 
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 router.post('/', function(req, res, next) {
-  if (req.body.password === req.body.password_confirmation) {
+  if (req.body.password === req.body.passwordConfirmation) {
     User.create({
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10),
@@ -18,7 +14,7 @@ router.post('/', function(req, res, next) {
     })
     .then(user => {
       res.setHeader("Content-Type", "application/json");
-      res.status(201).send(JSON.stringify(user.apiKey))
+      res.status(201).send(JSON.stringify({apiKey: user.apiKey}))
     })
     .catch(error => {
       res.setHeader("Content-Type", "application/json");
