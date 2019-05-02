@@ -13,7 +13,7 @@ router.get('/', async function(req, res, next) {
 
   const geocode = async () => {
     try {
-      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.query.location}&key=AIzaSyDZXAjAoJTlZwO24HRUR1HNy-GkmdEx9fQ`);
+      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.query.location}&key=${process.env.GEOCODE_KEY}`);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -26,14 +26,13 @@ router.get('/', async function(req, res, next) {
 
   const forecast = async () => {
     try {
-      const response = await fetch(`https://api.darksky.net/forecast/821bdc0c5e50220cb45d84d29cbddbbb/${coordinates.lat},${coordinates.lng}`);
+      const response = await fetch(`https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${coordinates.lat},${coordinates.lng}`);
       const data = await response.json()
       return data;
     } catch (error) {
       return error;
     }
   };
-  eval(pry.it);
   var weather = await forecast();
   res.setHeader("Content-Type", "application/json");
   if (user && user.apiKey === req.body.apiKey) {
