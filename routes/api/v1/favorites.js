@@ -54,7 +54,7 @@ router.post('/', async function(req, res, next) {
   res.setHeader("Content-Type", "application/json");
   if (user && user.apiKey === req.body.apiKey) {
     res.status(201).send(JSON.stringify({
-      message: `${city.name}, ${city.state}, ${city.country} has been added to your favorites.`
+      message: `${city[0].name}, ${city[0].state}, ${city[0].country} has been added to your favorites.`
     }));
   } else {
     res.status(401).send(JSON.stringify({error: 'Something went wrong'}))
