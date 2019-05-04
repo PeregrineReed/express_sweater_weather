@@ -2,6 +2,7 @@ var express = require('express');
 var fetch = require('node-fetch');
 var pry = require('pryjs');
 var User = require('../../../models').User;
+var City = require('../../../models').City;
 
 var router = express.Router();
 
@@ -11,7 +12,8 @@ router.post('/', function(req, res, next) {
       apiKey: req.body.apiKey
     }
   }).then(user => {
-    user.cities 
+    // user.cities
+
   }).then(results => {
     res.setHeader("Content-Type", "application/json")
     res.status(200).send(JSON.stringify({message: `${req.body.location} has been added to your favorites`}))
@@ -26,8 +28,9 @@ router.get('/', function(req, res, next) {
       apiKey: req.body.apiKey
     }
   }).then(user => {
+    eval(pry.it)
     res.setHeader("Content-Type", "application/json")
-    res.status(200).send(user.cities)
+    res.status(200).send(user.getCities())
   }).catch(error => {
     res.status(401).send({ error })
   })
