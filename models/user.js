@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     instanceMethods: {
       getCities: function() {
-        User.associations.Cities.findAll({
+        User.associations.Cities.findAll({    
           include: [{
             model: UserCity,
             where: { UserId: this.id }
