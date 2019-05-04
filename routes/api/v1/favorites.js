@@ -3,6 +3,7 @@ var fetch = require('node-fetch');
 var pry = require('pryjs');
 var User = require('../../../models').User;
 var City = require('../../../models').City;
+var UserCity = require('../../../models').UserCity;
 
 var router = express.Router();
 
@@ -22,7 +23,7 @@ router.post('/', async function(req, res, next) {
       return error;
     }
   };
-  
+
   var location = await geocode();
   var city = await City.findOrCreate({
     where: {
