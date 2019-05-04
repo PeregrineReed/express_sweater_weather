@@ -28,9 +28,10 @@ router.get('/', function(req, res, next) {
       apiKey: req.body.apiKey
     }
   }).then(user => {
-    eval(pry.it)
+    return user.getCities()
+  }).then(cities => {
     res.setHeader("Content-Type", "application/json")
-    res.status(200).send(user.getCities())
+    res.status(200).send(JSON.stringify({ favorites: cities }))
   }).catch(error => {
     res.status(401).send({ error })
   })
