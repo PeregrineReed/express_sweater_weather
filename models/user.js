@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: DataTypes.STRING,
     apiKey: DataTypes.STRING
-  }, {
+  },
+  {
     instanceMethods: {
       getCities: function() {
         User.associations.Cities.findAll({
