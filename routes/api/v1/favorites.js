@@ -13,7 +13,6 @@ router.post('/', async function(req, res, next) {
     }
   });
 
-  var location = await geocode();
   const geocode = async () => {
     try {
       const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.query.location}&key=${process.env.GEOCODE_KEY}`);
@@ -23,7 +22,8 @@ router.post('/', async function(req, res, next) {
       return error;
     }
   };
-
+  
+  var location = await geocode();
   var city = await City.findOrCreate({
     where: {
       name: location.results[0].address_components[0].long_name,
