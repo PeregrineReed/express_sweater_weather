@@ -16,7 +16,6 @@ router.post('/', async function(req, res, next) {
 
   const geocode = async () => {
     try {
-      eval(pry.it)
       const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.location}&key=${process.env.GEOCODE_KEY}`);
       const data = await response.json();
       return data;
@@ -50,7 +49,7 @@ router.post('/', async function(req, res, next) {
       UserId: user.id,
       CityId: city[0].id
     }
-  })
+  });
 
   res.setHeader("Content-Type", "application/json");
   if (user && favorite && user.apiKey === req.body.apiKey) {
@@ -102,7 +101,7 @@ router.get('/', async function(req, res, next) {
   };
 });
 
-router.delete('/', function(req, res, next) {
+router.delete('/', async function(req, res, next) {
   var user = await User.findOne({
     where: {
       apiKey: req.body.apiKey
@@ -117,10 +116,16 @@ router.delete('/', function(req, res, next) {
     }
   });
 
+  var favorite = await UserCity.destroy({
+    where: {
+      UserId: user.id,
+      CityId: city.id
+    }
+  });
   res.setHeader("Content-Type", "application/json");
   if (user && user.apiKey === req.body.apiKey) {
     res.status(201).send(JSON.stringify({
-      message: `${city[0].name}, ${city[0].state}, ${city[0].country} has been removed from your favorites.`
+      message: `${city.name}, ${city.state}, ${city.country} has been removed from your favorites.`
     }));
   } else {
     res.status(401).send(JSON.stringify({error: 'Something went wrong.'}))
