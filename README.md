@@ -9,8 +9,8 @@
 `npm install`
 to install dependancies
 
-```npx sequelize db:create
-npx sequelize db:migrate```
+`npx sequelize db:create`
+`npx sequelize db:migrate`
 to create the database
 
 ###API Keys
