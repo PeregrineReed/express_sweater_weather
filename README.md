@@ -1,10 +1,10 @@
 # express_sweater_weather
 
-#Production
+# Production
 
 `https://express-swtr-wthr.herokuapp.com`
 
-##Setup and Installation
+## Setup and Installation
 
 `npm install`
 to install dependancies
@@ -13,7 +13,7 @@ to install dependancies
 `npx sequelize db:migrate`
 to create the database
 
-###API Keys
+### API Keys
 An API key from Google Maps and DarkSky will be required to complete setup
 
 link to Google Maps: `https://developers.google.com/maps/documentation/javascript/get-api-key`
@@ -23,9 +23,9 @@ a `.env` file will be needed to store the API Keys:
 `GEOCODE_KEY`
 `DARKSKY_KEY`
 
-##Using the application
+## Using the application
 
-###Account Creation
+### Account Creation
 
 Request
 
@@ -48,7 +48,7 @@ body:
   "apiKey": "974fa09a-59e0-40f6-a4da-5692b6a61a92",
 }```
 
-###Login
+### Login
 
 Request
 
@@ -70,7 +70,7 @@ body:
   "apiKey": "974fa09a-59e0-40f6-a4da-5692b6a61a92",
 }```
 
-###Forecast for a City
+### Forecast for a City
 
 Request
 
@@ -127,7 +127,7 @@ Response
     }
 }```
 
-###Adding A Favorite
+### Adding A Favorite
 
 Request
 
@@ -146,7 +146,7 @@ Response
     "message": "Portland, OR, United States has been added to your favorites."
 }```
 
-###Listing Favorites
+### Listing Favorites
 
 Request
 
@@ -194,7 +194,7 @@ Response
     ]
 }```
 
-###Removing Favorites
+### Removing Favorites
 
 Request
 
